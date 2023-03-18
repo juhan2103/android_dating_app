@@ -12,13 +12,6 @@ class JoinActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
-
-        val joinBtn = findViewById<Button>(R.id.joinBtn)
-        joinBtn.setOnClickListener {
-
-            val intent = Intent(this, JoinActivity::class.java)
-            startActivity(intent)
-
-        }
+        
     }
 }
