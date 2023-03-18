@@ -17,26 +17,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            // 프로필 이미지
+<!--            프로필 이미지-->
             <ImageView
                 android:src="@drawable/profile_img"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"/>
 
-            // 이메일
+<!--            이메일-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailArea"
                     android:hint="email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 패스워드
+<!--            패스워드-->
             <com.google.android.material.textfield.TextInputLayout
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
@@ -45,13 +46,14 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/pwdArea"
                     android:hint="password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 패스워드 확인
+<!--            패스워드 확인-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
@@ -64,7 +66,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 닉네임
+<!--            닉네임-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
@@ -77,7 +79,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 지역
+<!--            지역-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
@@ -90,7 +92,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 성별
+<!--            성별-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
@@ -103,7 +105,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 나이
+<!--            나이-->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
@@ -116,8 +118,9 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            // 회원가입 버튼
+<!--            회원가입 버튼-->
             <Button
+                android:id="@+id/joinBtn"
                 android:text="회원가입"
                 android:background="@color/main_color"
                 android:layout_margin="10dp"
