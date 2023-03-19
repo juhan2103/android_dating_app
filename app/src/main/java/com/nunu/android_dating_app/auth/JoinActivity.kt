@@ -27,21 +27,26 @@ class JoinActivity : AppCompatActivity() {
 
         auth = Firebase.auth
 
+        // joinBtn을 눌렀을 때
         val joinBtn = findViewById<Button>(R.id.joinBtn)
         joinBtn.setOnClickListener {
 
             val email = findViewById<TextInputEditText>(R.id.emailArea)
             val pwd = findViewById<TextInputEditText>(R.id.pwdArea)
 
+            // 회원가입으로 유저 생성
             auth.createUserWithEmailAndPassword(email.text.toString(), pwd.text.toString())
                 .addOnCompleteListener(this) { task ->
+                    // 회원가입이 성공했을 때
                     if (task.isSuccessful) {
                         Log.d(TAG, "createUser")
 
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
 
-                    } else {
+                    }
+                    // 실패했을 때
+                    else {
 
                     }
                 }
