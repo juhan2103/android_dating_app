@@ -4,7 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import com.nunu.android_dating_app.auth.IntroActivity
 import com.nunu.android_dating_app.slider.CardStackAdapter
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
@@ -20,6 +24,17 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val setting = findViewById<ImageView>(R.id.settingIcon)
+        // 아이콘을 누르면 로그아웃 되도록 구현
+        setting.setOnClickListener {
+
+            val auth = Firebase.auth
+            auth.signOut()
+
+            val intent = Intent(this, IntroActivity::class.java)
+            startActivity(intent)
+        }
 
         val cardStackView = findViewById<CardStackView>(R.id.cardStackView)
 

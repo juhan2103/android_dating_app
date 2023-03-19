@@ -2,11 +2,13 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="20dp"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    // 사진 이미지 영역
+<!--    사진 이미지 영역-->
     <LinearLayout
+        android:background="@color/white"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="500dp"/>
 
-        // 이름
+<!--       이름-->
         <TextView
             android:text="Name"
             android:textSize="30sp"
@@ -28,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        // 나이
+<!--        나이-->
         <TextView
             android:text="Age"
             android:textSize="30sp"
@@ -38,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        // 지역
+<!--        지역-->
         <TextView
             android:text="City"
             android:textSize="30sp"
@@ -51,7 +53,7 @@
 
     </LinearLayout>
 
-    // 왼쪽으로 넘기면 x
+<!--    왼쪽으로 넘기면 X-->
     <FrameLayout
         android:id="@+id/left_overlay"
         android:layout_width="match_parent"
@@ -65,7 +67,7 @@
 
     </FrameLayout>
 
-    // 오른쪽으로 넘기면 O
+<!--    오른쪽으로 넘기면 O-->
     <FrameLayout
         android:id="@+id/right_overlay"
         android:layout_width="match_parent"

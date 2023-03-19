@@ -5,11 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity"
     tools:ignore="MissingConstraints">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+<!--        로그아웃 아이콘-->
+        <ImageView
+            android:id="@+id/settingIcon"
+            android:src="@drawable/profile_img"
+            android:layout_margin="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <com.yuyakaido.android.cardstackview.CardStackView
+        android:background="@color/white"
         android:id="@+id/cardStackView"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
