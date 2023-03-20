@@ -74,6 +74,9 @@ class MainActivity : AppCompatActivity() {
                 // 방향이 오른쪽일 때
                 if (direction == Direction.Right){
                     Toast.makeText(this@MainActivity, "right",Toast.LENGTH_SHORT).show()
+
+                    // 좋아요 표시를 한 다른 유저 UID 저장
+                    userLikeOtherUser(uid, usersDataList[userCount].uid.toString())
                 }
 
                 // 방향이 왼쪽일 때
@@ -182,6 +185,13 @@ class MainActivity : AppCompatActivity() {
         // userInfoRef에 있는 데이터 불러오기
         FirebaseRef.userInfoRef.addValueEventListener(postListener)
 
+    }
+
+    // 유저의 좋아요를 저장하는 함수
+    private fun userLikeOtherUser(myUid : String, otherUid : String){
+
+        // 좋아요 누른 다른 유저 UID를 나의 UID 하위 목록 데이터베이스에 저장
+        FirebaseRef.userLikeRef.child(uid).child(otherUid).setValue(true)
     }
 
 }
