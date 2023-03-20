@@ -36,7 +36,7 @@ class SettingActivity : AppCompatActivity() {
             auth.signOut()
 
             // IntroActivity로 전환
-            val intent = Intent(th환s, IntroActivity::class.java)
+            val intent = Intent(this, IntroActivity::class.java)
             startActivity(intent)
         }
 
