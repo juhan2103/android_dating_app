@@ -22,6 +22,7 @@
 
 <!--       이름-->
         <TextView
+            android:id="@+id/itemNickname"
             android:text="Name"
             android:textSize="30sp"
             android:textColor="@color/black"
@@ -32,6 +33,7 @@
 
 <!--        나이-->
         <TextView
+            android:id="@+id/itemAge"
             android:text="Age"
             android:textSize="30sp"
             android:textColor="@color/black"
@@ -42,6 +44,7 @@
 
 <!--        지역-->
         <TextView
+            android:id="@+id/itemCity"
             android:text="City"
             android:textSize="30sp"
             android:textColor="@color/black"
