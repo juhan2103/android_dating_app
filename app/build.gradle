@@ -56,4 +56,11 @@ dependencies {
 
     // add firebase realtime database dependency
     implementation 'com.google.firebase:firebase-database-ktx'
+
+    // add firebase storage dependency
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    // init glide dependency
+    implementation 'com.github.bumptech.glide:glide:4.15.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
 }
