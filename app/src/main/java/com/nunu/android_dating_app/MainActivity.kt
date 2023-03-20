@@ -14,6 +14,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.nunu.android_dating_app.auth.IntroActivity
 import com.nunu.android_dating_app.auth.UserDataModel
+import com.nunu.android_dating_app.setting.MyPageActivity
+import com.nunu.android_dating_app.setting.SettingActivity
 import com.nunu.android_dating_app.slider.CardStackAdapter
 import com.nunu.android_dating_app.utils.FirebaseRef
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
@@ -38,13 +40,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val setting = findViewById<ImageView>(R.id.settingIcon)
-        // 아이콘을 누르면 로그아웃 되도록 구현
+
+        // Icon을 눌렀을 때
         setting.setOnClickListener {
 
-            val auth = Firebase.auth
-            auth.signOut()
-
-            val intent = Intent(this, IntroActivity::class.java)
+            // SettingActivity로 이동
+            val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
 
