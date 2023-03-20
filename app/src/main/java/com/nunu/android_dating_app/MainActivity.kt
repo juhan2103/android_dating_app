@@ -1,6 +1,10 @@
 package com.nunu.android_dating_app
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +12,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -203,9 +209,16 @@ class MainActivity : AppCompatActivity() {
                 for (dataModel in dataSnapshot.children){
 
                     val likeUserKey = dataModel.key.toString()
+
                     // 다른 사람의 좋아요 리스트에 나의 UID가 있을 때
                     if(likeUserKey.equals(uid)){
                         Toast.makeText(this@MainActivity, "매칭 완료", Toast.LENGTH_LONG).show()
+
+                        // notificationChannel 생성 함수 호출
+                        createNotificationChannel()
+
+                        // notification message 보내는 함수 호출
+                        sendNotification()
                     }
 
                 }
@@ -220,4 +233,36 @@ class MainActivity : AppCompatActivity() {
         FirebaseRef.userLikeRef.child(otherUid).addValueEventListener(postListener)
     }
 
+    // notificationChannel 생성 함수
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "name"
+            val descriptionText = "description"
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel("Test_Channel", name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    // notification message 보내는 함수
+    private fun sendNotification(){
+
+
+        var builder = NotificationCompat.Builder(this, "Test_Channel")
+            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setContentTitle("매칭완료")
+            .setContentText("매칭이 완료되었습니다")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        with(NotificationManagerCompat.from(this)){
+            notify(123, builder.build())
+        }
+
+    }
 }
