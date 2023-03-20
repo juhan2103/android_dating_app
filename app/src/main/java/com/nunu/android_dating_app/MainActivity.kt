@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
     // user의 데이터를 받아놓을 리스트
     private val usersDataList = mutableListOf<UserDataModel>()
 
+    private var userCount = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -56,7 +59,27 @@ class MainActivity : AppCompatActivity() {
 
             }
 
+            // CardStackView를 Swipe 했을 때
             override fun onCardSwiped(direction: Direction?) {
+
+                // 방향이 오른쪽일 때
+                if (direction == Direction.Right){
+                    Toast.makeText(this@MainActivity, "right",Toast.LENGTH_SHORT).show()
+                }
+
+                // 방향이 왼쪽일 때
+                if (direction == Direction.Left){
+                    Toast.makeText(this@MainActivity, "left",Toast.LENGTH_SHORT).show()
+                }
+
+                userCount = userCount + 1
+
+                // 카드를 다 넘기면
+                if (userCount == usersDataList.count()){
+                    // 다시 유저 정보를 받아옴
+                    getUserDataList()
+                    Toast.makeText(this@MainActivity, "User Refresh",Toast.LENGTH_LONG).show()
+                }
 
             }
 
