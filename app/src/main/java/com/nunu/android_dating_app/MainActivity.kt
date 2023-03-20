@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
                     Log.d(TAG, dataModel.toString())
 
                     // user 정보를 리스트에 추가
-                    val user = dataSnapshot.getValue(UserDataModel::class.java)
+                    val user = dataModel.getValue(UserDataModel::class.java)
                     usersDataList.add(user!!)
                 }
 
