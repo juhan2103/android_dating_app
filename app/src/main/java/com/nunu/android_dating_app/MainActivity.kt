@@ -73,7 +73,6 @@ class MainActivity : AppCompatActivity() {
 
                 // 방향이 오른쪽일 때
                 if (direction == Direction.Right){
-                    Toast.makeText(this@MainActivity, "right",Toast.LENGTH_SHORT).show()
 
                     // 좋아요 표시를 한 다른 유저 UID 저장
                     userLikeOtherUser(uid, usersDataList[userCount].uid.toString())
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
                 // 방향이 왼쪽일 때
                 if (direction == Direction.Left){
-                    Toast.makeText(this@MainActivity, "left",Toast.LENGTH_SHORT).show()
+
                 }
 
                 userCount = userCount + 1
@@ -192,6 +191,33 @@ class MainActivity : AppCompatActivity() {
 
         // 좋아요 누른 다른 유저 UID를 나의 UID 하위 목록 데이터베이스에 저장
         FirebaseRef.userLikeRef.child(uid).child(otherUid).setValue(true)
+
+        getOtherUserLikeList(otherUid)
+    }
+
+    // 내가 좋아요를 누른 다른 사람의 좋아요 리스트를 불러오는 함수
+    private fun getOtherUserLikeList(otherUid: String){
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                for (dataModel in dataSnapshot.children){
+
+                    val likeUserKey = dataModel.key.toString()
+                    // 다른 사람의 좋아요 리스트에 나의 UID가 있을 때
+                    if(likeUserKey.equals(uid)){
+                        Toast.makeText(this@MainActivity, "매칭 완료", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        FirebaseRef.userLikeRef.child(otherUid).addValueEventListener(postListener)
     }
 
 }
