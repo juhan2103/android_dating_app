@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -35,6 +38,23 @@ class JoinActivity : AppCompatActivity() {
         // Initialize Firebase Auth
 
         auth = Firebase.auth
+
+        // 회원가입 화면 프로필 이미지
+        val profileImage = findViewById<ImageView>(R.id.imageArea)
+
+        // 갤러리 불러오는 함수
+        val getAction = registerForActivityResult(
+            ActivityResultContracts.GetContent(),
+            ActivityResultCallback { uri ->
+                profileImage.setImageURI(uri)
+            }
+        )
+
+        // 프로필 이미지를 눌렀을 때
+        profileImage.setOnClickListener {
+            getAction.launch("image/*")
+        }
+
 
         // joinBtn을 눌렀을 때
         val joinBtn = findViewById<Button>(R.id.joinBtn)
