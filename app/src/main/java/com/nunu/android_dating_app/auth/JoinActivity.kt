@@ -11,11 +11,13 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.ktx.storage
 import com.nunu.android_dating_app.MainActivity
 import com.nunu.android_dating_app.R
@@ -73,7 +75,7 @@ class JoinActivity : AppCompatActivity() {
             val emailCheck = email.text.toString()
 
             // email 입력란이 비어있을때
-            if(emailCheck.isEmpty()){
+            if (emailCheck.isEmpty()) {
                 Toast.makeText(this, "이메일이 입력되지 않았습니다", Toast.LENGTH_LONG).show()
             }
 
@@ -93,23 +95,43 @@ class JoinActivity : AppCompatActivity() {
                         val user = auth.currentUser
                         uid = user?.uid.toString()
 
-                        val userModel = UserDataModel(
-                            uid,
-                            nickname,
-                            age,
-                            gender,
-                            city
-                        )
+                        // 유저 토큰 정보 받아오기
+                        FirebaseMessaging.getInstance().token.addOnCompleteListener(
+                            OnCompleteListener { task ->
+                                if (!task.isSuccessful) {
+                                    Log.w(
+                                        TAG,
+                                        "Fetching FCM registration token failed",
+                                        task.exception
+                                    )
+                                    return@OnCompleteListener
+                                }
 
-                        // 유저 정보를 데이터베이스에 저장
-                        FirebaseRef.userInfoRef.child(uid).setValue(userModel)
+                                // Get new FCM registration token
+                                val token = task.result
 
-                        // 프로필 이미지를 해당 유저의 storage에 저장
-                        uploadImage(uid)
+                                Log.e(TAG, token.toString())
 
-                        // MainActivity로 화면 전환
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                                val userModel = UserDataModel(
+                                    uid,
+                                    nickname,
+                                    age,
+                                    gender,
+                                    token,
+                                    city,
+
+                                )
+
+                                // 유저 정보를 데이터베이스에 저장
+                                FirebaseRef.userInfoRef.child(uid).setValue(userModel)
+
+                                // 프로필 이미지를 해당 유저의 storage에 저장
+                                uploadImage(uid)
+
+                                // MainActivity로 화면 전환
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                            })
 
                     }
                     // 실패했을 때
@@ -117,6 +139,7 @@ class JoinActivity : AppCompatActivity() {
 
                     }
                 }
+
         }
 
     }
