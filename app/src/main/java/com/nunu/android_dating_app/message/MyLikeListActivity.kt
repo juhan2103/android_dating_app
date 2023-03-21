@@ -43,13 +43,16 @@ class MyLikeListActivity : AppCompatActivity() {
         // 내가 좋아요 표시한 사람들 리스트를 불러오는 함수 호출
         getMyLikeList()
 
+        // 리스트뷰 안에 있는 아이템을 터치했을 때
         userListView.setOnItemClickListener { parent, view, position, id ->
 
+            // 서로 좋아요를 눌렀는지 확인하는 함수
             checkMatching(likeUserList[position].uid.toString())
         }
 
     }
 
+    // 서로 좋아요를 눌렀는지 확인하는 함수
     private fun checkMatching(otherUid : String){
 
         val postListener = object : ValueEventListener {
@@ -62,6 +65,8 @@ class MyLikeListActivity : AppCompatActivity() {
                 for (dataModel in dataSnapshot.children){
 
                     val likeUserKey = dataModel.key.toString()
+
+                    // 만약 UID가 같다면
                     if (likeUserKey.equals(uid)){
                         Toast.makeText(this@MyLikeListActivity, "매칭이 되었습니다.", Toast.LENGTH_LONG).show()
                     }
