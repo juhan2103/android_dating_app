@@ -8,6 +8,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.nunu.android_dating_app.R
 import com.nunu.android_dating_app.auth.IntroActivity
+import com.nunu.android_dating_app.message.MyLikeListActivity
 
 class SettingActivity : AppCompatActivity() {
 
@@ -22,6 +23,16 @@ class SettingActivity : AppCompatActivity() {
         myBtn.setOnClickListener {
             // MyPageActivity로 이동
             val intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
+        }
+
+        val myLikeBtn = findViewById<Button>(R.id.myLikeList)
+
+        // 매칭 리스트 버튼을 눌렀을 때
+        myLikeBtn.setOnClickListener {
+
+            // 매칭 리스트로 이동
+            val intent = Intent(this, MyLikeListActivity::class.java)
             startActivity(intent)
         }
 
