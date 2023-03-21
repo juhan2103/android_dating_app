@@ -40,12 +40,45 @@ class MyLikeListActivity : AppCompatActivity() {
         listViewAdapter = ListViewAdapter(this, likeUserList)
         userListView.adapter = listViewAdapter
 
-        // 전체 유저 데이터 불러오는 함수 호출
-        getUserDataList()
-
         // 내가 좋아요 표시한 사람들 리스트를 불러오는 함수 호출
         getMyLikeList()
 
+        userListView.setOnItemClickListener { parent, view, position, id ->
+
+            checkMatching(likeUserList[position].uid.toString())
+        }
+
+    }
+
+    private fun checkMatching(otherUid : String){
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                if(dataSnapshot.children.count() == 0){
+                    Toast.makeText(this@MyLikeListActivity, "매칭이 되지 않았습니다.", Toast.LENGTH_LONG).show()
+                }
+
+                for (dataModel in dataSnapshot.children){
+
+                    val likeUserKey = dataModel.key.toString()
+                    if (likeUserKey.equals(uid)){
+                        Toast.makeText(this@MyLikeListActivity, "매칭이 되었습니다.", Toast.LENGTH_LONG).show()
+                    }
+                    else{
+                        Toast.makeText(this@MyLikeListActivity, "매칭이 되지 않았습니다.", Toast.LENGTH_LONG).show()
+                    }
+
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        FirebaseRef.userLikeRef.child(otherUid).addValueEventListener(postListener)
     }
 
     // 내가 좋아요 표시한 사람들 리스트를 불러오는 함수
