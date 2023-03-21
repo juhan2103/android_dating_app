@@ -8,6 +8,7 @@
     tools:context=".setting.SettingActivity"
     android:orientation="vertical">
 
+<!--    마이페이지-->
     <Button
         android:id="@+id/myPageBtn"
         android:text="myPage"
@@ -17,6 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+<!--    매칭 리스트-->
+    <Button
+        android:id="@+id/myLikeList"
+        android:text="my Matching List"
+        android:textColor="@color/black"
+        android:background="#D3D3D3"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+<!--    로그아웃-->
     <Button
         android:id="@+id/logoutBtn"
         android:text="LOGOUT"
