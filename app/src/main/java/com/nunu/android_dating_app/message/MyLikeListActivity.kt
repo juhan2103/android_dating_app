@@ -3,6 +3,7 @@ package com.nunu.android_dating_app.message
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ListView
 import android.widget.Toast
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -25,10 +26,19 @@ class MyLikeListActivity : AppCompatActivity() {
     // 내가 좋아요 표시한 사람들의 리스트
     private val likeUserList = mutableListOf<UserDataModel>()
 
+    // 먼저 listViewAdapter를 선언을 해줘야 함
+    lateinit var listViewAdapter : ListViewAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_like_list)
+
+        val userListView = findViewById<ListView>(R.id.userListView)
+
+        // ListView  Adapter 연결
+        listViewAdapter = ListViewAdapter(this, likeUserList)
+        userListView.adapter = listViewAdapter
 
         // 전체 유저 데이터 불러오는 함수 호출
         getUserDataList()
@@ -82,6 +92,7 @@ class MyLikeListActivity : AppCompatActivity() {
                     }
 
                 }
+                listViewAdapter.notifyDataSetChanged()
                 Log.d(TAG, likeUserList.toString())
 
             }
