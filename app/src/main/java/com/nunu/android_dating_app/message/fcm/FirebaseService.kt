@@ -23,8 +23,8 @@ class FirebaseService : FirebaseMessagingService(){
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        val title = message.notification?.title.toString()
-        val body = message.notification?.body.toString()
+        val title = message.data["title"].toString()
+        val body = message.data["content"].toString()
 
         // notificationChannel 생성 함수 호출
         createNotificationChannel()

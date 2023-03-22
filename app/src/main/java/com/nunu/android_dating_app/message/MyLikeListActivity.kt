@@ -11,8 +11,14 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import com.nunu.android_dating_app.R
 import com.nunu.android_dating_app.auth.UserDataModel
+import com.nunu.android_dating_app.message.fcm.NotiModel
+import com.nunu.android_dating_app.message.fcm.PushNotification
+import com.nunu.android_dating_app.message.fcm.RetrofitInstance
 import com.nunu.android_dating_app.utils.FirebaseAuthUtils
 import com.nunu.android_dating_app.utils.FirebaseRef
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MyLikeListActivity : AppCompatActivity() {
 
@@ -48,6 +54,13 @@ class MyLikeListActivity : AppCompatActivity() {
 
             // 서로 좋아요를 눌렀는지 확인하는 함수
             checkMatching(likeUserList[position].uid.toString())
+
+            val notiModel = NotiModel("a", "b")
+
+            val pushModel = PushNotification(notiModel, likeUserList[position].token.toString())
+
+            // Push 알림 보내는 함수 호출
+            testPush(pushModel)
         }
 
     }
@@ -59,7 +72,7 @@ class MyLikeListActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 if(dataSnapshot.children.count() == 0){
-                    Toast.makeText(this@MyLikeListActivity, "매칭이 되지 않았습니다.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MyLikeListActivity, "매칭이 0", Toast.LENGTH_LONG).show()
                 }
 
                 for (dataModel in dataSnapshot.children){
@@ -143,5 +156,11 @@ class MyLikeListActivity : AppCompatActivity() {
 
         // userInfoRef에 있는 데이터 불러오기
         FirebaseRef.userInfoRef.addValueEventListener(postListener)
+    }
+
+    // Push 알림 보내는 함수
+    private fun testPush(notification : PushNotification) = CoroutineScope(Dispatchers.IO).launch {
+
+        RetrofitInstance.api.postNotification(notification)
     }
 }
