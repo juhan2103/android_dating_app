@@ -28,6 +28,7 @@ import com.nunu.android_dating_app.setting.SettingActivity
 import com.nunu.android_dating_app.slider.CardStackAdapter
 import com.nunu.android_dating_app.utils.FirebaseAuthUtils
 import com.nunu.android_dating_app.utils.FirebaseRef
+import com.nunu.android_dating_app.utils.MyInfo
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
@@ -138,6 +139,9 @@ class MainActivity : AppCompatActivity() {
 
                 // 회원정보 불러오는 함수 호출
                 getUserDataList(currentUserGender)
+
+                // 닉네임을 불러옴
+                MyInfo.myNickname = data?.nickname.toString()
 
             }
 
