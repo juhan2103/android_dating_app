@@ -9,6 +9,7 @@ import com.google.firebase.ktx.Firebase
 import com.nunu.android_dating_app.R
 import com.nunu.android_dating_app.auth.IntroActivity
 import com.nunu.android_dating_app.message.MyLikeListActivity
+import com.nunu.android_dating_app.message.MyMsgActivity
 
 class SettingActivity : AppCompatActivity() {
 
@@ -34,6 +35,17 @@ class SettingActivity : AppCompatActivity() {
             // 매칭 리스트로 이동
             val intent = Intent(this, MyLikeListActivity::class.java)
             startActivity(intent)
+        }
+
+        val myMsg = findViewById<Button>(R.id.myMsg)
+
+        // 메세지 보관함 버튼을 눌렀을 때
+        myMsg.setOnClickListener {
+
+            // 메세지 보관함으로 이동
+            val intent = Intent(this, MyMsgActivity::class.java)
+            startActivity(intent)
+
         }
 
         val logoutBtn = findViewById<Button>(R.id.logoutBtn)
