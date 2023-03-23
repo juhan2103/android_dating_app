@@ -14,5 +14,8 @@ class FirebaseRef {
 
         // 유저 좋아요 데이터베이스
         val userLikeRef = database.getReference("userLike")
+
+        // 유저 메세지 데이터베이스
+        val userMsgRef = database.getReference("userMsg")
     }
 }
