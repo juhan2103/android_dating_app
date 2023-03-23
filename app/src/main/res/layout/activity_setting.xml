@@ -28,6 +28,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+<!--    보낸 메세지 확인창-->
+    <Button
+        android:id="@+id/myMsg"
+        android:text="내가 받은 메세지"
+        android:textColor="@color/black"
+        android:background="#D3D3D3"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 <!--    로그아웃-->
     <Button
         android:id="@+id/logoutBtn"
